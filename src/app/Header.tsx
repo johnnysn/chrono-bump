@@ -1,10 +1,26 @@
+import Image from "next/image";
+import Link from "next/link";
+
 export default function Header() {
   return (
-    <header className="flex justify-center bg-cyan-500 text-gray-50 border-b-8 border-b-cyan-600">
+    <header className="flex justify-center bg-cyan-500 text-gray-50 border-b-4 border-b-cyan-600">
       <nav className="max-w-screen-xl w-full px-2 md:px-6 flex items-center justify-between">
-        <div>Logo</div>
+        <Link href={"/"}>
+          <Image src={"/logo.png"} width={133} height={33} alt="Chrono Bump" />
+        </Link>
 
-        <ul>Menu</ul>
+        <ul className="text-xl flex gap-4">
+          <li>
+            <Link href={"/help"} className="menu-link">
+              Help
+            </Link>
+          </li>
+          <li>
+            <Link href={"/about"} className="menu-link">
+              About
+            </Link>
+          </li>
+        </ul>
       </nav>
     </header>
   );
