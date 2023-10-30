@@ -3,18 +3,34 @@ import Beat from "@/types/beat";
 import MetronomeConfig from "@/types/metronome-config";
 import { useEffect, useState } from "react";
 import MetronomeBeat from "./MetronomeBeat";
+import useStepMetronome from "@/hooks/useStepMetronome";
+import usePlayClickSound from "@/hooks/usePlayClickSound";
 
 interface Props {
   config: MetronomeConfig;
+  isPlaying: boolean;
 }
 
 const defaultBeat: Beat = {
-  level: 1,
+  level: 2,
 };
 
-export default function Metronome({ config }: Props) {
-  const [beats, setBeats] = useState<Beat[]>([{ ...defaultBeat }]);
-  const [activeBeat, setActiveBeat] = useState<number | null>(null);
+const defaultBeats: Beat[] = [
+  { level: 3 },
+  { ...defaultBeat },
+  { ...defaultBeat },
+  { ...defaultBeat },
+];
+
+export default function Metronome({ config, isPlaying }: Props) {
+  const [beats, setBeats] = useState<Beat[]>(defaultBeats);
+  const [activeBeat, setActiveBeat] = useStepMetronome(
+    config.tempo,
+    config.beatCount,
+    config.noteValue,
+    isPlaying
+  );
+  usePlayClickSound(beats, activeBeat, isPlaying);
 
   useEffect(() => {
     setBeats((curr) => {
@@ -32,7 +48,7 @@ export default function Metronome({ config }: Props) {
   }, [config.beatCount]);
 
   return (
-    <div className="flex justify-center gap-2">
+    <div className="flex justify-center gap-1 md:gap-4">
       {beats.map((b, index) => (
         <MetronomeBeat key={index} beat={b} active={activeBeat == index} />
       ))}
