@@ -30,7 +30,7 @@ export default function Metronome({ config, isPlaying }: Props) {
     config.noteValue,
     isPlaying
   );
-  usePlayClickSound(beats, activeBeat, config.synthetic || false, isPlaying);
+  usePlayClickSound(beats, activeBeat, true, isPlaying);
 
   useEffect(() => {
     setBeats((curr) => {
@@ -45,7 +45,7 @@ export default function Metronome({ config, isPlaying }: Props) {
       return newBeats;
     });
     setActiveBeat(null);
-  }, [config.beatCount]);
+  }, [config.beatCount, setActiveBeat]);
 
   return (
     <div className="flex justify-center gap-1 md:gap-4">
