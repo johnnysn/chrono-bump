@@ -31,9 +31,10 @@ export default function NoteSelector({ onNoteChanged }: Props) {
   };
 
   return (
-    <div className="cursor-pointer flex flex-col items-center gap-2" onClick={clickHandler}>
-      <Image src={src} width={54} height={82} alt="Nota" />
-      <p className="text-lg">{name}</p>
+    <div className="cursor-pointer flex flex-col items-center" onClick={clickHandler}>
+      <p>Note value</p>
+      <Image src={src} width={54} height={82} alt="Nota" className="mb-2" />
+      <p className="text-2xl">{name}</p>
     </div>
   );
 }
