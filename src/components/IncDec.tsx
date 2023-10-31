@@ -1,3 +1,4 @@
+"use client";
 interface Props {
   onInc: () => void;
   onDec: () => void;

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="flex justify-center bg-cyan-500 text-gray-50 border-b-4 border-b-cyan-600">
+    <header className="flex justify-center bg-cyan-500 text-gray-50">
       <nav className="max-w-screen-xl w-full px-2 md:px-6 flex items-center justify-between">
         <Link href={"/"}>
           <Image src={"/logo.png"} width={177} height={44} priority={true} alt="Chrono Bump" />

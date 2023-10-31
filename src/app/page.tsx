@@ -1,4 +1,5 @@
 "use client";
+import BeatCountSelector from "@/components/BeatCountSelector";
 import Metronome from "@/components/Metronome";
 import NoteSelector from "@/components/NoteSelector";
 import TempoSelector from "@/components/TempoSelector";
@@ -31,8 +32,15 @@ export default function Home() {
     }));
   };
 
+  const beatCountChangedHandler = (beatCount: number) => {
+    setConfig((curr) => ({
+      ...curr,
+      beatCount: beatCount as 1 | 2 | 3 | 4 | 5 | 6 | 7,
+    }));
+  };
+
   return (
-    <div className="mt-2 flex flex-col gap-10 items-center">
+    <div className="mt-2 flex flex-col gap-7 items-center">
       <Metronome config={config} isPlaying={isPlaying} />
 
       <button
@@ -45,6 +53,8 @@ export default function Home() {
       <NoteSelector onNoteChanged={noteChangedHandler} />
 
       <TempoSelector onTempoChanged={tempoChangedHandler} defaultValue={100} />
+
+      <BeatCountSelector onBeatCountChanged={beatCountChangedHandler} defaultValue={4} />
     </div>
   );
 }
