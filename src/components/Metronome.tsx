@@ -30,7 +30,7 @@ export default function Metronome({ config, isPlaying }: Props) {
     config.noteValue,
     isPlaying
   );
-  usePlayClickSound(beats, activeBeat, true, isPlaying);
+  usePlayClickSound(beats, activeBeat, config.synthetic || false, isPlaying);
 
   useEffect(() => {
     setBeats((curr) => {
