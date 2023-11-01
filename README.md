@@ -6,7 +6,7 @@
 
 ## A simple out-of-the-box metronome web application developed in Next.js
 
-Chrono Bump is a pretty straightforward metronome application for practicing music developed in [Next.js](https://nextjs.org/) using [Tailwind CSS](https://tailwindcss.com/).
+Chrono Bump is a user-friendly metronome application for practicing music developed in [Next.js](https://nextjs.org/) using [Tailwind CSS](https://tailwindcss.com/).
 
 ## Features
 
