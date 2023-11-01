@@ -32,15 +32,11 @@ export default function TempoSelector({ defaultValue, onTempoChanged }: Props) {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <p className="leading-none">Tempo</p>
+    <div className="flex flex-col items-center mb-2">
+      <p className="leading-none">Tempo (BPM)</p>
 
       <div className="mb-4">
-        <IncDec
-          label={"" + tempo}
-          onDec={() => updateValue(tempo - 1)}
-          onInc={() => updateValue(tempo + 1)}
-        />
+        <IncDec label={"" + tempo} onDec={() => updateValue(tempo - 1)} onInc={() => updateValue(tempo + 1)} />
       </div>
 
       <input
