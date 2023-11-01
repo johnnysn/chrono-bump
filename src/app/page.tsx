@@ -19,26 +19,23 @@ export default function Home() {
     setIsPlaying((curr) => !curr);
   };
 
-  const noteChangedHandler = (note: NoteValue) => {
+  const noteChangedHandler = (noteValue: NoteValue) =>
     setConfig((curr) => ({
       ...curr,
-      noteValue: note,
+      noteValue,
     }));
-  };
 
-  const tempoChangedHandler = (tempo: number) => {
+  const tempoChangedHandler = (tempo: number) =>
     setConfig((curr) => ({
       ...curr,
       tempo,
     }));
-  };
 
-  const beatCountChangedHandler = (beatCount: number) => {
+  const beatCountChangedHandler = (beatCount: number) =>
     setConfig((curr) => ({
       ...curr,
-      beatCount: beatCount as 1 | 2 | 3 | 4 | 5 | 6 | 7,
+      beatCount,
     }));
-  };
 
   return (
     <div className="mt-2 flex flex-col gap-7 items-center">

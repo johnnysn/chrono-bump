@@ -1,3 +1,7 @@
 export default function Page() {
-  return <div>Help page</div>;
+  return (
+    <div>
+      <p className="text-xl">This page is still under construction...</p>
+    </div>
+  );
 }

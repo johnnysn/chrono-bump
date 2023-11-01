@@ -6,7 +6,9 @@ export default function Header() {
     <header className="flex justify-center bg-cyan-500 text-gray-50">
       <nav className="max-w-screen-xl w-full px-2 md:px-6 flex items-center justify-between">
         <Link href={"/"}>
-          <Image src={"/logo.png"} width={177} height={44} priority={true} alt="Chrono Bump" />
+          <h1>
+            <Image src={"/logo.png"} width={177} height={44} priority={true} alt="Chrono Bump" />
+          </h1>
         </Link>
 
         <ul className="text-xl flex gap-4">
