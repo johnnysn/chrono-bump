@@ -1,19 +1,18 @@
 import recordedClickService from "@/services/recorded-click-service";
 import synthClickService from "@/services/synth-click-service";
-import Beat from "@/types/beat";
+import BeatLevel from "@/types/beat-level";
 import { useEffect } from "react";
 
 export default function usePlayClickSound(
-  beats: Beat[],
   activeBeatIndex: number | null,
+  level: BeatLevel | null,
   synthetic: boolean,
   isPlaying: boolean
 ) {
   useEffect(() => {
-    if (activeBeatIndex != null && isPlaying) {
-      const level = beats[activeBeatIndex].level;
+    if (activeBeatIndex !== null && level !== null && isPlaying) {
       if (synthetic) synthClickService.play(level);
       else recordedClickService.play(level);
     }
-  }, [beats, activeBeatIndex, isPlaying, synthetic]);
+  }, [activeBeatIndex, level, isPlaying, synthetic]);
 }

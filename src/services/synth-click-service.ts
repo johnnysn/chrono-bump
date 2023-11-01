@@ -1,3 +1,5 @@
+import BeatLevel from "@/types/beat-level";
+
 let audioContext: AudioContext;
 let envelope: GainNode;
 
@@ -12,7 +14,7 @@ const createAudioContext = () => {
 };
 
 export class SynthClickService {
-  play(level: 1 | 2 | 3) {
+  play(level: BeatLevel) {
     if (!audioContext || !envelope) {
       createAudioContext();
     }
@@ -21,7 +23,7 @@ export class SynthClickService {
       envelope.gain.cancelScheduledValues(0);
       const oscillator = audioContext.createOscillator();
       oscillator.type = "square";
-      oscillator.frequency.value = level > 2 ? 1000 : level > 1 ? 800 : 600;
+      oscillator.frequency.value = level === 2 ? 1000 : level === 1 ? 800 : 600;
       oscillator.connect(envelope);
 
       envelope.gain.value = 0;

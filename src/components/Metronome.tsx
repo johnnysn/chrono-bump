@@ -1,43 +1,39 @@
 "use client";
-import Beat from "@/types/beat";
 import MetronomeConfig from "@/types/metronome-config";
 import { useEffect, useState } from "react";
 import MetronomeBeat from "./MetronomeBeat";
 import useStepMetronome from "@/hooks/useStepMetronome";
 import usePlayClickSound from "@/hooks/usePlayClickSound";
+import BeatLevel from "@/types/beat-level";
 
 interface Props {
   config: MetronomeConfig;
   isPlaying: boolean;
 }
 
-const defaultBeat: Beat = {
-  level: 2,
-};
-
-const defaultBeats: Beat[] = [
-  { level: 3 },
-  { ...defaultBeat },
-  { ...defaultBeat },
-  { ...defaultBeat },
-];
+const defaultBeats: BeatLevel[] = [BeatLevel.STRONG, BeatLevel.NORMAL, BeatLevel.NORMAL, BeatLevel.NORMAL];
 
 export default function Metronome({ config, isPlaying }: Props) {
-  const [beats, setBeats] = useState<Beat[]>(defaultBeats);
+  const [beats, setBeats] = useState<BeatLevel[]>(defaultBeats);
   const [activeBeat, setActiveBeat] = useStepMetronome(
     config.tempo,
     config.beatCount,
     config.noteValue,
     isPlaying
   );
-  usePlayClickSound(beats, activeBeat, config.synthetic || false, isPlaying);
+  usePlayClickSound(
+    activeBeat,
+    activeBeat !== null ? beats[activeBeat] : null,
+    config.synthetic || false,
+    isPlaying
+  );
 
   useEffect(() => {
     setBeats((curr) => {
       const newBeats = [...curr];
 
       if (config.beatCount > curr.length) {
-        for (let i = curr.length; i < config.beatCount; i++) newBeats.push({ ...defaultBeat });
+        for (let i = curr.length; i < config.beatCount; i++) newBeats.push(BeatLevel.NORMAL);
       } else if (config.beatCount < curr.length) {
         for (let i = curr.length; i > config.beatCount; i--) newBeats.pop();
       }
@@ -47,10 +43,19 @@ export default function Metronome({ config, isPlaying }: Props) {
     setActiveBeat(null);
   }, [config.beatCount, setActiveBeat]);
 
+  const beatLevelChanged = (index: number, level: BeatLevel) => {
+    beats[index] = level;
+  };
+
   return (
     <div className="flex justify-center gap-1 md:gap-4">
       {beats.map((b, index) => (
-        <MetronomeBeat key={index} beat={b} active={activeBeat == index} />
+        <MetronomeBeat
+          key={index}
+          defaultBeatLevel={b}
+          onBeatLevelChanged={(level) => beatLevelChanged(index, level)}
+          active={activeBeat == index}
+        />
       ))}
     </div>
   );

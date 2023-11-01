@@ -3,7 +3,8 @@ import BeatCountSelector from "@/components/BeatCountSelector";
 import Metronome from "@/components/Metronome";
 import NoteSelector from "@/components/NoteSelector";
 import TempoSelector from "@/components/TempoSelector";
-import MetronomeConfig, { Note } from "@/types/metronome-config";
+import MetronomeConfig from "@/types/metronome-config";
+import NoteValue from "@/types/note-value";
 import { useState } from "react";
 
 export default function Home() {
@@ -11,14 +12,14 @@ export default function Home() {
   const [config, setConfig] = useState<MetronomeConfig>({
     beatCount: 4,
     tempo: 100,
-    noteValue: Note.CROTCHET,
+    noteValue: NoteValue.CROTCHET,
   });
 
   const playButtonClickHandler = () => {
     setIsPlaying((curr) => !curr);
   };
 
-  const noteChangedHandler = (note: Note) => {
+  const noteChangedHandler = (note: NoteValue) => {
     setConfig((curr) => ({
       ...curr,
       noteValue: note,

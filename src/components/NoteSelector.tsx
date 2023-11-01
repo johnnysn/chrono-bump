@@ -1,30 +1,30 @@
 "use client";
+import NoteValue from "@/types/note-value";
 import Image from "next/image";
-import { Note } from "@/types/metronome-config";
 import { useState } from "react";
 
 interface Props {
-  onNoteChanged: (note: Note) => void;
+  onNoteChanged: (note: NoteValue) => void;
 }
 
 export default function NoteSelector({ onNoteChanged }: Props) {
-  const [note, setNote] = useState(Note.CROTCHET);
+  const [note, setNote] = useState(NoteValue.CROTCHET);
 
   let src = "/seminima.svg";
   let name = "Crotchet";
 
-  if (note === Note.QUAVER) {
+  if (note === NoteValue.QUAVER) {
     name = "Quaver";
     src = "/colcheia.svg";
-  } else if (note == Note.QUAVER_TRIPLET) {
+  } else if (note == NoteValue.QUAVER_TRIPLET) {
     name = "Quaver (Triplet)";
     src = "/colcheia-3.svg";
   }
 
   const clickHandler = () => {
-    let next = Note.CROTCHET;
-    if (note === Note.CROTCHET) next = Note.QUAVER;
-    else if (note === Note.QUAVER) next = Note.QUAVER_TRIPLET;
+    let next = NoteValue.CROTCHET;
+    if (note === NoteValue.CROTCHET) next = NoteValue.QUAVER;
+    else if (note === NoteValue.QUAVER) next = NoteValue.QUAVER_TRIPLET;
 
     onNoteChanged(next);
     setNote(next);

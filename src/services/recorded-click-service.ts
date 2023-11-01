@@ -1,11 +1,13 @@
+import BeatLevel from "@/types/beat-level";
+
 const audios =
   typeof window !== "undefined"
     ? [new Audio("click1.mp3"), new Audio("click2.mp3"), new Audio("click3.mp3")]
     : [];
 
 export class RecordedClickService {
-  play(level: 1 | 2 | 3) {
-    const audio = audios[level - 1];
+  play(level: BeatLevel) {
+    const audio = audios[level];
 
     audio.play();
     audio.currentTime = 0;

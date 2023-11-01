@@ -1,10 +1,10 @@
-import { Note } from "@/types/metronome-config";
+import NoteValue from "@/types/note-value";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 export default function useStepMetronome(
   tempo: number,
   beatCount: number,
-  noteValue: Note,
+  noteValue: NoteValue,
   isPlaying: boolean
 ): [number | null, Dispatch<SetStateAction<number | null>>] {
   const [activeBeat, setActiveBeat] = useState<number | null>(null);
@@ -20,10 +20,11 @@ export default function useStepMetronome(
       };
 
       let period = Math.round((1000 * 60) / tempo);
-      if (noteValue == Note.QUAVER) period = Math.round(period / 2);
-      else if (noteValue == Note.QUAVER_TRIPLET) period = Math.round(period / 3);
+      if (noteValue == NoteValue.QUAVER) period = Math.round(period / 2);
+      else if (noteValue == NoteValue.QUAVER_TRIPLET) period = Math.round(period / 3);
 
       const intervalId = setInterval(stepMetronome, period);
+      stepMetronome(); // Play first click immediately
 
       return () => clearInterval(intervalId);
     } else {

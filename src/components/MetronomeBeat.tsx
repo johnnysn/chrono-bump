@@ -1,18 +1,20 @@
 "use client";
-import Beat from "@/types/beat";
+import BeatLevel from "@/types/beat-level";
 import { useState } from "react";
 
 interface Props {
-  beat: Beat;
+  defaultBeatLevel: BeatLevel;
+  onBeatLevelChanged: (beatLevel: BeatLevel) => void;
   active: boolean;
 }
 
-export default function MetronomeBeat({ beat, active }: Props) {
-  const [bars, setBars] = useState(beat.level);
+export default function MetronomeBeat({ defaultBeatLevel, onBeatLevelChanged, active }: Props) {
+  const [bars, setBars] = useState(defaultBeatLevel);
 
   const clickHandler = () => {
-    beat.level = (beat.level === 3 ? 1 : beat.level + 1) as 1 | 2 | 3;
-    setBars(beat.level);
+    const newLevel = (bars === BeatLevel.STRONG ? BeatLevel.WEAK : bars + 1) as BeatLevel;
+    setBars(newLevel);
+    onBeatLevelChanged(newLevel);
   };
 
   return (
@@ -25,7 +27,7 @@ export default function MetronomeBeat({ beat, active }: Props) {
       cursor-pointer`}
       onClick={clickHandler}
     >
-      {Array.from(Array(bars).keys()).map((l) => (
+      {Array.from(Array(bars + 1).keys()).map((l) => (
         <span
           key={l}
           className={`${active ? "bg-gray-50" : "bg-cyan-600"} rounded w-full h-3 block`}
