@@ -1,13 +1,13 @@
 "use client";
-import MetronomeConfig from "@/types/metronome-config";
 import { useEffect, useState } from "react";
 import MetronomeBeat from "./MetronomeBeat";
 import useStepMetronome from "@/hooks/useStepMetronome";
 import usePlayClickSound from "@/hooks/usePlayClickSound";
 import BeatLevel from "@/types/beat-level";
+import MetronomeConfig from "@/types/metronome-config";
 
 interface Props {
-  config: MetronomeConfig;
+  config: MetronomeConfig.Type;
   isPlaying: boolean;
 }
 
@@ -49,7 +49,7 @@ export default function Metronome({ config, isPlaying }: Props) {
   };
 
   return (
-    <div className="flex justify-center gap-1 md:gap-4">
+    <div className="flex justify-center gap-1 md:gap-4 mb-5">
       {beats.map((b, index) => (
         <MetronomeBeat
           key={index}

@@ -1,34 +1,19 @@
 "use client";
-
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import styles from "./TempoSelector.module.css";
 import IncDec from "./IncDec";
+import MetronomeConfig from "@/types/metronome-config";
 
 interface Props {
-  defaultValue: number;
+  tempo: number;
   onTempoChanged: (tempo: number) => void;
 }
 
-const MIN_TEMPO = 40;
-const MAX_TEMPO = 200;
-
-export default function TempoSelector({ defaultValue, onTempoChanged }: Props) {
-  const [tempo, setTempo] = useState(defaultValue);
-
-  const updateValue = (value: number) => {
-    if (value < MIN_TEMPO) {
-      value = MIN_TEMPO;
-    } else if (value > MAX_TEMPO) {
-      value = MAX_TEMPO;
-    }
-    setTempo(value);
-    onTempoChanged(value);
-  };
-
+export default function TempoSelector({ tempo, onTempoChanged }: Props) {
   const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     let value = +event.target.value;
 
-    updateValue(value);
+    onTempoChanged(value);
   };
 
   return (
@@ -36,13 +21,17 @@ export default function TempoSelector({ defaultValue, onTempoChanged }: Props) {
       <p className="leading-none">Tempo (BPM)</p>
 
       <div className="mb-4">
-        <IncDec label={"" + tempo} onDec={() => updateValue(tempo - 1)} onInc={() => updateValue(tempo + 1)} />
+        <IncDec
+          label={"" + tempo}
+          onDec={() => onTempoChanged(tempo - 1)}
+          onInc={() => onTempoChanged(tempo + 1)}
+        />
       </div>
 
       <input
         type="range"
-        min={MIN_TEMPO}
-        max={MAX_TEMPO}
+        min={MetronomeConfig.MIN_TEMPO}
+        max={MetronomeConfig.MAX_TEMPO}
         step={5}
         value={tempo}
         onChange={changeHandler}
