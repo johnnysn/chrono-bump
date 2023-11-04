@@ -39,7 +39,13 @@ export default function Metronome({ config, isPlaying }: Props) {
   }, [config.beatCount, setActiveBeat]);
 
   const beatLevelChanged = (index: number, level: BeatLevel) => {
-    beats[index] = level;
+    setBeats((curr) => {
+      const newBeats = [...curr];
+
+      newBeats[index] = level;
+
+      return newBeats;
+    });
   };
 
   return (
@@ -47,7 +53,7 @@ export default function Metronome({ config, isPlaying }: Props) {
       {beats.map((b, index) => (
         <MetronomeBeat
           key={index}
-          defaultBeatLevel={b}
+          beatLevel={b}
           onBeatLevelChanged={(level) => beatLevelChanged(index, level)}
           active={activeBeat == index}
         />
