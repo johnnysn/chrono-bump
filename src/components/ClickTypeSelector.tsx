@@ -9,7 +9,7 @@ interface Props {
 
 export default function ClickTypeSelector({ clickType, onClickTypeChanged }: Props) {
   const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    onClickTypeChanged(event.target.checked ? ClickType.SYNTHETIC : ClickType.RECORDED);
+    onClickTypeChanged(event.target.checked ? ClickType.RECORDED : ClickType.SYNTHETIC);
   };
 
   return (
@@ -20,11 +20,12 @@ export default function ClickTypeSelector({ clickType, onClickTypeChanged }: Pro
         <input
           type="checkbox"
           className="accent-amber-500"
-          checked={clickType === ClickType.SYNTHETIC}
+          checked={clickType === ClickType.RECORDED}
           onChange={changeHandler}
         />
-        <span className="text-lg">Use synth beats</span>
+        <span className="text-lg">Use recorded beats</span>
       </label>
+      <span>(might hurt precision on some browsers)</span>
     </div>
   );
 }

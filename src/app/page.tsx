@@ -16,7 +16,7 @@ export default function Home() {
     beatCount: 4,
     tempo: 100,
     noteValue: NoteValue.CROTCHET,
-    clickType: ClickType.RECORDED,
+    clickType: ClickType.SYNTHETIC,
   });
 
   return (
