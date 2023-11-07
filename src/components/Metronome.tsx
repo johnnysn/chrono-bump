@@ -7,7 +7,7 @@ import BeatLevel from "@/types/beat-level";
 import MetronomeConfig from "@/types/metronome-config";
 
 interface Props {
-  config: MetronomeConfig.Type;
+  config: MetronomeConfig.Config;
   isPlaying: boolean;
 }
 

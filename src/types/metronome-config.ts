@@ -2,7 +2,7 @@ import ClickType from "./click-type";
 import NoteValue from "./note-value";
 
 namespace MetronomeConfig {
-  export interface Type {
+  export interface Config {
     beatCount: number;
     tempo: number;
     noteValue: NoteValue;
@@ -16,15 +16,10 @@ namespace MetronomeConfig {
 
   export interface Action {
     type: "setTempo" | "setBeatCount" | "setNoteValue" | "setClickType";
-    data: {
-      tempo?: number;
-      beatCount?: number;
-      noteValue?: NoteValue;
-      clickType?: ClickType;
-    };
+    data: Partial<Config>;
   }
 
-  export function reducer(state: Type, action: Action) {
+  export function reducer(state: Config, action: Action) {
     const newState = { ...state };
 
     switch (action.type) {
