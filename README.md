@@ -1,6 +1,5 @@
 # :musical_note: Chrono Bump :guitar:
 
-![Project Status: Work in Progress](https://img.shields.io/badge/Project%20Status-Work%20in%20Progress-orange)
 ![GitHub](https://img.shields.io/github/license/johnnysn/chrono-bump)
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/johnnysn/chrono-bump)
 
