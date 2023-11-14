@@ -1,5 +1,5 @@
-import NoteValue from "@/types/note-value";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import NoteValue from '@/types/note-value';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 export default function useStepMetronome(
   tempo: number,
@@ -11,17 +11,16 @@ export default function useStepMetronome(
 
   useEffect(() => {
     if (isPlaying) {
-      const stepMetronome = () => {
-        setActiveBeat((curr) => {
+      const stepMetronome = () => setActiveBeat((curr) => {
           if (curr == null) return 0;
 
           return curr < beatCount - 1 ? curr + 1 : 0;
         });
-      };
 
       let period = Math.round((1000 * 60) / tempo);
       if (noteValue == NoteValue.QUAVER) period = Math.round(period / 2);
-      else if (noteValue == NoteValue.QUAVER_TRIPLET) period = Math.round(period / 3);
+      else if (noteValue == NoteValue.QUAVER_TRIPLET)
+        period = Math.round(period / 3);
 
       const intervalId = setInterval(stepMetronome, period);
       stepMetronome(); // Play first click immediately
